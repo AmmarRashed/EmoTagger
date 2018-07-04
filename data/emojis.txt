@@ -7,7 +7,7 @@
 # Emoji Data for UTS #51
 # Version: 11.0
 #
-# For documentation and usage, see http://www.unicode.org/reports/tr51
+# For documentation and usage, see 3
 #
 # Format: 
 # <codepoint(s)> ; <property> # <comments> 

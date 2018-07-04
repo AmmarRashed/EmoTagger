@@ -49,7 +49,7 @@ if __name__ == '__main__':
     tagged_text = generate_tagged_text(emoticon_text)
     with open("out.txt","w") as f:
         f.write(tagged_text)
+    print("Tagged text saved to out.txt")
     p = input("Print the tagged text (Y or N)? ")
     if "Y" in p:
         print(tagged_text)
-
