@@ -1,4 +1,4 @@
-import pickle, copy
+import pickle, copy, sys
 
 
 def get_emoticon_tag(token:str):
@@ -42,4 +42,14 @@ except:
     save_data()
     root = pickle.load(open("data/emoticons_trie.pkl", "rb"))
 
-print(generate_tagged_text(":"))
+
+if __name__ == '__main__':
+    program = sys.argv[0]
+    emoticon_text = sys.argv[1]
+    tagged_text = generate_tagged_text(emoticon_text)
+    with open("out.txt","w") as f:
+        f.write(tagged_text)
+    p = input("Print the tagged text (Y or N)? ")
+    if "Y" in p:
+        print(tagged_text)
+
