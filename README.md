@@ -1,4 +1,4 @@
-# EmoticonTrieTagger
+# EmoTagger
 <p>
 <img src="https://cdn.shopify.com/s/files/1/1061/1924/products/Emoji_Icon_-_Sunglasses_cool_emoji_large.png?v=1513251060" width=100 /></br>
 Detecting emoticons with a Trie implementation and generating the tagged text.
