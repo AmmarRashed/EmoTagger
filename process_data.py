@@ -17,31 +17,19 @@ def clean_code_label(code, label):
     return codes, labels
 
 
-def get_emojis_dict(emojis_path="emojis.txt"):
-    with open("data/emojis.txt", 'r') as f:
-        emojis_raw = f.read()
-
+def get_emojis_dict(emojis_path="data/raw.txt"):
     emojis_dict = dict()  # {unicode: label}
-    for l in emojis_raw.split("\n"):
-        if "; Emoji" in l:
-            emoji_info = re.findall(r"\)\s+[A-Za-z]+.+", l)
-            try:
-                emoji_info[0]
-            except IndexError:
-                continue
-            else:
-                label_raw = re.sub("\)\s+", "", emoji_info[0])
-                code_raw = l.split()[0]
-
-                codes, labels = clean_code_label(code_raw, label_raw)
-                for i in range(len(codes)):
-                    emojis_dict[codes[i]] = labels[i]
+    with open(emojis_path, 'r') as f:
+        for line in f.readlines():
+            tag, code = line.split("\t")
+            emojis_dict[code.strip()] = tag
     return emojis_dict
+
 
 # Emoticons
 
 
-def download_emoticons(url="https://pc.net/emoticons/"):
+def get_emoticons_dict(url="https://pc.net/emoticons/"):
     opener = ureq.FancyURLopener({})
     f = opener.open(url)
     content = f.read()
@@ -56,11 +44,16 @@ def download_emoticons(url="https://pc.net/emoticons/"):
 
 
 
-def save_data():
+def save_data(save_dict=False):
     emojis_dict = get_emojis_dict()
-    emoticons_dict = download_emoticons()
+    emoticons_dict = get_emoticons_dict()
     tags_dict = copy.deepcopy(emoticons_dict)
     tags_dict.update(emojis_dict)
+
+    if save_dict:
+        json.dump({"emojis": get_emojis_dict(), "emoticons": get_emoticons_dict()},
+                  open("data/e_labels.json", "w"),
+                  ensure_ascii=False)
 
     root = Node("")
     for emot, tag in tags_dict.items():
@@ -69,8 +62,4 @@ def save_data():
     pickle.dump(root, open("data/emoticons_trie.pkl", "wb"))
 
 if __name__ == "__main__":
-    save_data()
-
-# json.dump({"emojis":emojis_dict, "emoticons":emoticons_dict},
-#           open("e_labels.json","w"),
-#           ensure_ascii=False)
+    save_data(True)
