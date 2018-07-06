@@ -7,8 +7,7 @@ Detecting emoticons with a Trie implementation and generating the tagged text.
 ## Data
 
 <p><a href="https://pc.net/emoticons/"> Emoticons </a></p>
-<p><a href="https://github.com/uclmr/emoji2vec/blob/master/data/raw_training_data/emoji_joined.txt"> <a href="https://github.com/uclmr">uclmr:</a> Emojis </a></p>
-
+<p><a href="https://github.com/uclmr/emoji2vec/blob/master/data/raw_training_data/emoji_joined.txt"> Emojis </a></p>
 ## Usage
 
 ```bash
